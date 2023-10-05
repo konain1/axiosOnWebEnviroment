@@ -4,7 +4,7 @@
 let url = 'https://api.tvmaze.com/shows';
 
 
-// let arr = []
+let arr = []
 
 // function getRate() {
 //     fetch(url)
@@ -24,11 +24,39 @@ let url = 'https://api.tvmaze.com/shows';
 // console.log(arr)
 
 
-async function getaxiosRate(){
-    let newData = await axios.get(url)
-    let myArr = await newData.data;
+ function getUrl(){
+    axios.get(url).then((res)=> {
+      
+      const dataa = res.data
+       
+     dataa.forEach(element => {
+        arr.push(element)
 
-    console.log(myArr)
+     });
+
+     getRating(arr)
+   })
+
 }
 
-getaxiosRate()
+getUrl()
+
+let ratings = []
+
+function getRating(arr){
+
+   arr.forEach((item)=>{
+    ratings.push(item.rating.average)
+   })
+   
+}
+
+
+
+
+function ratingSort(){
+
+    const sorted = ratings.sort((s,b)=>s-b)
+    console.log(sorted)
+}
+ratingSort()
